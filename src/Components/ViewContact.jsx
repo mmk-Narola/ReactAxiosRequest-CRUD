@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import axiosBaseURL from "../Api/contact";
 
 const ViewContact = () => {
   const [viewContactList, setViewContactList] = useState({});
   const { id } = useParams();
 
   const retriveContact = async () => {
-    const response = await axios.get(`http://localhost:3000/Contact/${id}`);
+    const response = await axiosBaseURL.get(`/Contact/${id}`);
     return response.data;
   };
 

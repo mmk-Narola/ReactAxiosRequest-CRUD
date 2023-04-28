@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import axiosBaseURL from "../Api/contact";
 
 const contactDetails = {
   name: "",
@@ -23,7 +24,7 @@ const AddContact = () => {
   }, [id]);
 
   const loadUserData = async () => {
-    const response = await axios.get(`http://localhost:3000/Contact/${id}`);
+    const response = await axiosBaseURL.get(`/Contact/${id}`);
     setContact({
       name: response.data.name,
       email: response.data.email,
@@ -50,17 +51,14 @@ const AddContact = () => {
     const request = {
       ...contact,
     };
-    const response = await axios.post("http://localhost:3000/Contact", request);
+    const response = await axiosBaseURL.post("/Contact", request);
     nagivate("/");
   };
 
   const handleUpdate = async (e) => {
     e.preventDefault();
     console.log(contact);
-    const response = await axios.put(
-      `http://localhost:3000/Contact/${id}`,
-      contact
-    );
+    const response = await axiosBaseURL.put(`/Contact/${id}`, contact);
     console.log(response.data);
     nagivate("/");
   };
